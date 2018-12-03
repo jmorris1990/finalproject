@@ -44,3 +44,26 @@ let drawFruit = () => {
     ctx.fillStyle = 'yellow';
     ctx.fillRect(fruitX, fruitY, 10, 10);
 }
+
+// character movement
+document.addEventListener('keydown', keyDownHandler, false);
+document.addEventListener('keyUp', keyUpHandler, false);
+let leftArrowPressed = false;
+let upArrowPressed = false;
+let rightArrowPressed = false;
+let downArrowPressed = false;
+
+function keyDownHandler(event) {
+    if(event.keyCode == 39) {
+        rightArrowPressed = true;
+    }
+    else if(event.keyCode == 37) {
+        leftArrowPressed = true;
+    }
+    if(event.keyCode == 40) {
+    	downArrowPressed = true;
+    }
+    else if(event.keyCode == 38) {
+    	upArrowPressed = true;
+    }
+}
