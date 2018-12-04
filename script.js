@@ -89,7 +89,6 @@ function movePlayer() {
         playerY -= 50;
     }
 }
-
 //game loop
 let loop = () => {
     drawCanvas();
@@ -97,6 +96,4 @@ let loop = () => {
     drawFruit();
     control();
     movePlayer();
-    console.log(fruitX);
-    console.log(fruitY);
 };
