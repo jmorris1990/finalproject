@@ -27,10 +27,6 @@ window.onload = function () {
     setInterval(loop, 1000 / 60);
 };
 
-let drawCanvas = () => {
-    ctx.fillStyle = 'grey'
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
 let startPlayer = () => {
     playerX = canvas.clientWidth / 2;
     playerY = canvas.height / 2;
