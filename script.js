@@ -37,13 +37,13 @@ let startPlayer = () => {
 };
 
 let drawCanvas = () => {
-    ctx.fillStyle = 'grey'
+    ctx.fillStyle = 'grey';
     ctx.fillRect(0, 0, canvas.clientWidth, canvas.height);
 };
 
 const drawPlayer = () => {
     ctx.fillStyle = 'black';
-    ctx.fillRect(playerX, playerY, 100, 100);
+    ctx.fillRect(playerX, playerY, 50, 50);
 };
 
 const drawFruit = () => {
@@ -75,7 +75,7 @@ function control() {
 
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
-
+//takes keyboard input
     function keyDownHandler(e) {
         if (e.keyCode == 39) {
             rightArrowPressed = true;
@@ -100,20 +100,32 @@ function control() {
         }
     }
 
-};
-
+}
+//moves player square based on values from keyboard input
 function movePlayer() {
     if (rightArrowPressed === true) {
-        playerX += 50;
+        playerX += 5;
+        if (playerX >= canvas.width) {
+            playerX -= 5;
+        }
     }
     if (leftArrowPressed === true) {
-        playerX -= 50;
+        playerX -= 5;
+        if (playerX <= 0) {
+            playerX -= playerX;
+        }
     }
     if (upArrowPressed === true) {
-        playerY += 50;
+        playerY -= 5;
+        if (playerY <= 0) {
+            playerY += 5;
+        }
     }
     if (downArrowPressed === true) {
-        playerY -= 50;
+        playerY += 5;
+        if (playerY >= canvas.height) {
+            playerY -= 5;
+        }
     }
 };
   
