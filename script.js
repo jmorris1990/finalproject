@@ -1,7 +1,6 @@
 let canvas;
 let ctx;
 
-//player location
 let playerX;
 let playerY;
 
@@ -11,16 +10,6 @@ let fruitY;
 let fruitdX = (Math.round(Math.random()) * 2 - 1) * 2;
 let fruitdY = (Math.round(Math.random()) * 2 - 1) * 2;
 
-//spawn conditions
-let spawnBoundaryTop;
-let spawnBoundaryBottom;
-let spawnBoundaryLeft;
-let spawnBoundaryRight;
-
-let spawnRate = 2000;
-let lastSpawn = -1;
-let spawnedFruits = [];
-let startT = Date.now();
 
 // character's movement
 let leftArrowPressed = false;
@@ -41,16 +30,20 @@ window.onload = function () {
 let drawCanvas = () => {
     ctx.fillStyle = 'grey'
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+let startPlayer = () => {
+    playerX = canvas.clientWidth / 2;
+    playerY = canvas.height / 2;
+};
+
+let drawCanvas = () => {
+    ctx.fillStyle = 'grey'
+    ctx.fillRect(0, 0, canvas.clientWidth, canvas.height);
 };
 
 const drawPlayer = () => {
     ctx.fillStyle = 'black';
     ctx.fillRect(playerX, playerY, 100, 100);
-};
-
-const startPlayer = () => {
-    playerX = canvas.width / 2;
-    playerY = canvas.height / 2;
 };
 
 const drawFruit = () => {
@@ -61,7 +54,7 @@ const drawFruit = () => {
 const startFruit = () => {
     fruitX = Math.random() * 500;
     fruitY = Math.random() * 500;
-}
+};
 
 const moveFruit = () => {
     fruitX += fruitdX;
@@ -123,8 +116,7 @@ function movePlayer() {
         playerY -= 50;
     }
 };
-
-
+  
 //game loop
 const loop = () => {
     drawCanvas();
@@ -133,5 +125,4 @@ const loop = () => {
     control();
     movePlayer();
     moveFruit();
-    console.log(fruitX);
 };
