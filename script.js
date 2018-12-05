@@ -19,7 +19,7 @@ window.onload = function () {
     ctx = canvas.getContext('2d');
     //60 frames per second refresh
     playerStart();
-    setInterval(loop, 1000 / 60)
+    setInterval(loop, 1000 / 60);
 };
 
 let playerStart = () => {
@@ -28,13 +28,13 @@ let playerStart = () => {
 };
 
 let drawCanvas = () => {
-    ctx.fillStyle = 'grey'
+    ctx.fillStyle = 'grey';
     ctx.fillRect(0, 0, canvas.clientWidth, canvas.height);
 };
 
 let drawPlayer = () => {
     ctx.fillStyle = 'black';
-    ctx.fillRect(playerX, playerY, 100, 100);
+    ctx.fillRect(playerX, playerY, 50, 50);
 };
 
 let drawFruit = () => {
@@ -73,20 +73,32 @@ function control() {
         }
     }
 
-};
+}
 
 function movePlayer() {
     if (rightArrowPressed === true) {
-        playerX += 50;
+        playerX += 5;
+        if (playerX >= canvas.width) {
+            playerX -= 5;
+        }
     }
     if (leftArrowPressed === true) {
-        playerX -= 50;
+        playerX -= 5;
+        if (playerX <= 0) {
+            playerX -= playerX;
+        }
     }
     if (upArrowPressed === true) {
-        playerY += 50;
+        playerY -= 5;
+        if (playerY <= 0) {
+            playerY += 5;
+        }
     }
     if (downArrowPressed === true) {
-        playerY -= 50;
+        playerY += 5;
+        if (playerY >= canvas.height) {
+            playerY -= 5;
+        }
     }
 }
 //game loop
