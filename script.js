@@ -1,68 +1,97 @@
 let canvas;
 let ctx;
 
-let player;
+//player location
 let playerX;
 let playerY;
 
-let fruit;
+//fruit location and velocity
 let fruitX;
 let fruitY;
+let fruitdX = (Math.round(Math.random()) * 2 - 1) * 2;
+let fruitdY = (Math.round(Math.random()) * 2 - 1) * 2;
 
- // character's movement
- let leftArrowPressed = false;
- let rightArrowPressed = false;
- let downArrowPressed = false;
- let upArrowPressed = false;
+//spawn conditions
+let spawnBoundaryTop;
+let spawnBoundaryBottom;
+let spawnBoundaryLeft;
+let spawnBoundaryRight;
+
+let spawnRate = 2000;
+let lastSpawn = -1;
+let spawnedFruits = [];
+let startT = Date.now();
+
+// character's movement
+let leftArrowPressed = false;
+let rightArrowPressed = false;
+let downArrowPressed = false;
+let upArrowPressed = false;
 
 //initialize game
 window.onload = function () {
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
-    //60 frames per second refresh
-    setInterval(loop, 1000 / 60)
+    startPlayer();
+    startFruit();
+    //60 frames per second refresh entire game loop
+    setInterval(loop, 1000 / 60);
 };
-
 
 let drawCanvas = () => {
     ctx.fillStyle = 'grey'
-    ctx.fillRect(0, 0, canvas.clientWidth, canvas.height);
-}
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+};
 
-let drawPlayer = () => {
+const drawPlayer = () => {
     ctx.fillStyle = 'black';
-    playerX = canvas.clientWidth / 2;
-    playerY = canvas.height / 2;
     ctx.fillRect(playerX, playerY, 100, 100);
-}
+};
 
-let drawFruit = () => {
-    fruitX = 50;
-    fruitY = 50;
+const startPlayer = () => {
+    playerX = canvas.width / 2;
+    playerY = canvas.height / 2;
+};
+
+const drawFruit = () => {
     ctx.fillStyle = 'yellow';
     ctx.fillRect(fruitX, fruitY, 10, 10);
+};
+
+const startFruit = () => {
+    fruitX = Math.random() * 500;
+    fruitY = Math.random() * 500;
 }
 
+const moveFruit = () => {
+    fruitX += fruitdX;
+    fruitY += fruitdY;
+    if (fruitX > canvas.width) {
+        fruitX = 0;
+    } if (fruitY > canvas.height) {
+        fruitY = 0;
+    }  if (fruitX < 0) {
+        fruitX = canvas.width;
+    } if (fruitY < 0) {
+        fruitY = canvas.height;
+    } 
+};
 
 
 function control() {
-   
+
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
 
     function keyDownHandler(e) {
         if (e.keyCode == 39) {
             rightArrowPressed = true;
-            console.log(rightArrowPressed)
         } else if (e.keyCode == 37) {
             leftArrowPressed = true;
-            console.log(leftArrowPressed)
         } else if (e.keyCode == 38) {
             upArrowPressed = true;
-            console.log(upArrowPressed)
         } else if (e.keyCode == 40) {
             downArrowPressed = true;
-            console.log(downArrowPressed)
         }
     }
 
@@ -77,12 +106,32 @@ function control() {
             downArrowPressed = false;
         }
     }
-}
+
+};
+
+function movePlayer() {
+    if (rightArrowPressed === true) {
+        playerX += 50;
+    }
+    if (leftArrowPressed === true) {
+        playerX -= 50;
+    }
+    if (upArrowPressed === true) {
+        playerY += 50;
+    }
+    if (downArrowPressed === true) {
+        playerY -= 50;
+    }
+};
+
 
 //game loop
-let loop = () => {
+const loop = () => {
     drawCanvas();
-    drawPlayer();
     drawFruit();
+    drawPlayer();
     control();
-}
+    movePlayer();
+    moveFruit();
+    console.log(fruitX);
+};
