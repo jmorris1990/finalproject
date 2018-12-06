@@ -7,7 +7,7 @@ let playerY;
 //fruit location and velocity
 let fruitX;
 let fruitY;
-let fruitdX = (Math.floor(Math.random()) * 2 - 1) * 2;
+let fruitdX = (Math.round(Math.random()) * 2 - 1) * 2;
 let fruitdY = (Math.round(Math.random()) * 2 - 1) * 2;
 
 
@@ -59,6 +59,20 @@ function startTimer(duration, display) {
         }
     }, 1000);
 }
+
+
+//initialize game
+window.onload = function () {
+    canvas = document.getElementById('canvas');
+    ctx = canvas.getContext('2d');
+    startPlayer();
+    startFruit();
+    //60 frames per second refresh entire game loop
+    setInterval(loop, 1000 / 60);
+        display = document.querySelector('#time');
+    startTimer(fiveMinutes, display);
+
+};
 
 let startPlayer = () => {
     playerX = canvas.clientWidth / 2;
