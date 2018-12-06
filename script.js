@@ -19,6 +19,28 @@ let rightArrowPressed = false;
 let downArrowPressed = false;
 let upArrowPressed = false;
 
+let score = 0;
+
+//initialize game
+window.onload = function () {
+    canvas = document.getElementById('canvas');
+    ctx = canvas.getContext('2d');
+    startPlayer();
+    startFruit();
+    drawScore();
+    //60 frames per second refresh entire game loop
+    setInterval(loop, 1000 / 60);
+        display = document.querySelector('#time');
+    startTimer(fiveMinutes, display);
+
+};
+// score
+function drawScore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = 'blue';
+    ctx.fillText("Score: "+score, 8, 20);
+}
+
 // timer
 
 function startTimer(duration, display) {
@@ -37,6 +59,7 @@ function startTimer(duration, display) {
         }
     }, 1000);
 }
+
 
 //initialize game
 window.onload = function () {
@@ -157,4 +180,5 @@ const loop = () => {
     control();
     movePlayer();
     moveFruit();
+    drawScore();
 };
