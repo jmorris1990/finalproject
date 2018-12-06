@@ -7,11 +7,32 @@ let playerY;
 let fruitX;
 let fruitY;
 
+let fiveMinutes = 60 * 5;
+
 // character's movement
 let leftArrowPressed = false;
 let rightArrowPressed = false;
 let downArrowPressed = false;
 let upArrowPressed = false;
+
+// timer
+
+function startTimer(duration, display) {
+    let timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            timer = duration;
+        }
+    }, 1000);
+}
 
 //initialize game
 window.onload = function () {
@@ -20,6 +41,9 @@ window.onload = function () {
     //60 frames per second refresh
     playerStart();
     setInterval(loop, 1000 / 60);
+        display = document.querySelector('#time');
+    startTimer(fiveMinutes, display);
+
 };
 
 let playerStart = () => {
