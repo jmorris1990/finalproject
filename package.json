@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/jmorris1990/finalproject/issues"
   },
-  "homepage": "https://github.com/jmorris1990/finalproject#readme"
+  "homepage": "https://github.com/jmorris1990/finalproject#readme",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
 }
