@@ -4,8 +4,14 @@ let ctx;
 let playerX;
 let playerY;
 
+//fruit location and velocity
 let fruitX;
 let fruitY;
+let fruitdX = (Math.round(Math.random()) * 2 - 1) * 2;
+let fruitdY = (Math.round(Math.random()) * 2 - 1) * 2;
+
+
+let fiveMinutes = 60 * 5;
 
 // character's movement
 let leftArrowPressed = false;
@@ -13,16 +19,62 @@ let rightArrowPressed = false;
 let downArrowPressed = false;
 let upArrowPressed = false;
 
+let score = 0;
+
 //initialize game
 window.onload = function () {
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
-    //60 frames per second refresh
-    playerStart();
-    setInterval(loop, 1000 / 60)
+    startPlayer();
+    startFruit();
+    drawScore();
+    //60 frames per second refresh entire game loop
+    setInterval(loop, 1000 / 60);
+        display = document.querySelector('#time');
+    startTimer(fiveMinutes, display);
+
+};
+// score
+function drawScore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = 'blue';
+    ctx.fillText("Score: "+score, 8, 20);
+}
+
+// timer
+
+function startTimer(duration, display) {
+    let timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            timer = duration;
+        }
+    }, 1000);
+}
+
+
+//initialize game
+window.onload = function () {
+    canvas = document.getElementById('canvas');
+    ctx = canvas.getContext('2d');
+    startPlayer();
+    startFruit();
+    //60 frames per second refresh entire game loop
+    setInterval(loop, 1000 / 60);
+        display = document.querySelector('#time');
+    startTimer(fiveMinutes, display);
+
 };
 
-let playerStart = () => {
+let startPlayer = () => {
     playerX = canvas.clientWidth / 2;
     playerY = canvas.height / 2;
 };
@@ -32,23 +84,41 @@ let drawCanvas = () => {
     ctx.fillRect(0, 0, canvas.clientWidth, canvas.height);
 };
 
-let drawPlayer = () => {
+const drawPlayer = () => {
     ctx.fillStyle = 'black';
-    ctx.fillRect(playerX, playerY, 100, 100);
+    ctx.fillRect(playerX, playerY, 50, 50);
 };
 
-let drawFruit = () => {
-    fruitX = 50;
-    fruitY = 50;
+const drawFruit = () => {
     ctx.fillStyle = 'yellow';
     ctx.fillRect(fruitX, fruitY, 10, 10);
 };
+
+const startFruit = () => {
+    fruitX = Math.random() * 500;
+    fruitY = Math.random() * 500;
+};
+
+const moveFruit = () => {
+    fruitX += fruitdX;
+    fruitY += fruitdY;
+    if (fruitX > canvas.width) {
+        fruitX = 0;
+    } if (fruitY > canvas.height) {
+        fruitY = 0;
+    }  if (fruitX < 0) {
+        fruitX = canvas.width;
+    } if (fruitY < 0) {
+        fruitY = canvas.height;
+    } 
+};
+
 
 function control() {
 
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
-
+//takes keyboard input
     function keyDownHandler(e) {
         if (e.keyCode == 39) {
             rightArrowPressed = true;
@@ -73,27 +143,42 @@ function control() {
         }
     }
 
-};
-
+}
+//moves player square based on values from keyboard input
 function movePlayer() {
     if (rightArrowPressed === true) {
-        playerX += 50;
+        playerX += 5;
+        if (playerX >= canvas.width) {
+            playerX -= 5;
+        }
     }
     if (leftArrowPressed === true) {
-        playerX -= 50;
+        playerX -= 5;
+        if (playerX <= 0) {
+            playerX -= playerX;
+        }
     }
     if (upArrowPressed === true) {
-        playerY += 50;
+        playerY -= 5;
+        if (playerY <= 0) {
+            playerY += 5;
+        }
     }
     if (downArrowPressed === true) {
-        playerY -= 50;
+        playerY += 5;
+        if (playerY >= canvas.height) {
+            playerY -= 5;
+        }
     }
-}
+};
+  
 //game loop
-let loop = () => {
+const loop = () => {
     drawCanvas();
-    drawPlayer();
     drawFruit();
+    drawPlayer();
     control();
     movePlayer();
+    moveFruit();
+    drawScore();
 };
