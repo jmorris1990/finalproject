@@ -1,12 +1,17 @@
 let canvas;
 let ctx;
 
+//player position and size
 let playerX;
 let playerY;
+let playerWidth = 100;
+let playerHeight = 100;
 
-//fruit location and velocity
+//fruit position, size, and velocity
 let fruitX;
 let fruitY;
+let fruitWidth = 10;
+let fruitHeight = 10;
 let fruitdX = (Math.round(Math.random()) * 2 - 1) * 2;
 let fruitdY = (Math.round(Math.random()) * 2 - 1) * 2;
 
@@ -61,19 +66,6 @@ function startTimer(duration, display) {
 }
 
 
-//initialize game
-window.onload = function () {
-    canvas = document.getElementById('canvas');
-    ctx = canvas.getContext('2d');
-    startPlayer();
-    startFruit();
-    //60 frames per second refresh entire game loop
-    setInterval(loop, 1000 / 60);
-        display = document.querySelector('#time');
-    startTimer(fiveMinutes, display);
-
-};
-
 let startPlayer = () => {
     playerX = canvas.clientWidth / 2;
     playerY = canvas.height / 2;
@@ -86,12 +78,12 @@ let drawCanvas = () => {
 
 const drawPlayer = () => {
     ctx.fillStyle = 'black';
-    ctx.fillRect(playerX, playerY, 50, 50);
+    ctx.fillRect(playerX, playerY, playerWidth, playerHeight);
 };
 
 const drawFruit = () => {
     ctx.fillStyle = 'yellow';
-    ctx.fillRect(fruitX, fruitY, 10, 10);
+    ctx.fillRect(fruitX, fruitY, fruitWidth, fruitHeight);
 };
 
 const startFruit = () => {
@@ -171,6 +163,20 @@ function movePlayer() {
         }
     }
 };
+
+
+function collision() {
+    //detect location of player and fruit and if they intersect
+    if (playerX < fruitX + fruitWidth &&
+        playerX + playerWidth > fruitX &&
+        playerY < fruitY + fruitHeight &&
+        playerHeight + playerY > fruitY) {
+        //change position of fruit
+        startFruit();
+        score ++;
+        //increment score
+    }
+}
   
 //game loop
 const loop = () => {
@@ -181,4 +187,5 @@ const loop = () => {
     movePlayer();
     moveFruit();
     drawScore();
+    collision();
 };
