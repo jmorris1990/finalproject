@@ -175,13 +175,13 @@ const collision = () => {
         //change position and velocity of fruit on collision
         startFruit();
         fruitdX = (Math.round(Math.random()) * 2 - 1) * 3;
-        ruitdY = (Math.round(Math.random()) * 2 - 1) * 3;
+        fruitdY = (Math.round(Math.random()) * 2 - 1) * 3;
         //increase score by 1
         score ++;
         
     }
 }
-  
+
 //game loop
 const loop = () => {
     drawCanvas();
