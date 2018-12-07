@@ -68,13 +68,6 @@ function startTimer(duration, display) {
     }, 1000);
 }
 
-// end game
-
-function endGame() {
-    if (timer == 0) {
-        alert(timer);
-    }
-}
 let startPlayer = () => {
     playerX = canvas.clientWidth / 2;
     playerY = canvas.height / 2;
