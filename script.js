@@ -16,7 +16,7 @@ let fruitdX = (Math.round(Math.random()) * 2 - 1) * 3;
 let fruitdY = (Math.round(Math.random()) * 2 - 1) * 3;
 
 
-let countDown = 60 * 1;
+let countDown = 60;
 
 // character's movement
 let leftArrowPressed = false;
@@ -25,6 +25,7 @@ let downArrowPressed = false;
 let upArrowPressed = false;
 
 let score = 0;
+
 
 //initialize game
 window.onload = function () {
@@ -61,10 +62,11 @@ function startTimer(duration, display) {
 
         if (--timer < 0) {
             timer = duration;
+            alert(score); // display score
+            location.reload(); // reload page
         }
     }, 1000);
 }
-
 
 let startPlayer = () => {
     playerX = canvas.clientWidth / 2;
@@ -162,7 +164,7 @@ function movePlayer() {
             playerY -= 5;
         }
     }
-};
+}
 
 
 function collision() {
