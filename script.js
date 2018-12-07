@@ -110,7 +110,7 @@ function control() {
 
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
-//takes keyboard input
+    //takes keyboard input
     function keyDownHandler(e) {
         if (e.keyCode == 39) {
             rightArrowPressed = true;
@@ -189,3 +189,5 @@ const loop = () => {
     drawScore();
     collision();
 };
+
+module.exports = {collision};

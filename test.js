@@ -1,0 +1,1 @@
+import { collision } from './script';
