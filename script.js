@@ -48,7 +48,7 @@ function drawScore() {
 
 // timer
 
-function startTimer(duration, display) {
+const startTimer = (duration, display) => {
     let timer = duration, minutes, seconds;
     setInterval(function () {
         minutes = parseInt(timer / 60, 10);
@@ -137,7 +137,7 @@ function control() {
 
 }
 //moves player square based on values from keyboard input
-function movePlayer() {
+const movePlayer = () => {
     if (rightArrowPressed === true) {
         playerX += 5;
         if (playerX >= canvas.width) {
@@ -165,7 +165,7 @@ function movePlayer() {
 };
 
 
-function collision() {
+const collision = () => {
     //detect location of player and fruit and if they intersect
     if (playerX < fruitX + fruitWidth &&
         playerX + playerWidth > fruitX &&
@@ -174,6 +174,8 @@ function collision() {
         //change position of fruit
         startFruit();
         score ++;
+        fruitdX = (Math.round(Math.random()) * 2 - 1) * 2;
+        ruitdY = (Math.round(Math.random()) * 2 - 1) * 2;
         //increment score
     }
 }
