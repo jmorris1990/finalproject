@@ -1,8 +1,6 @@
-#canvas {
-    display: block;
-    width: 50%;
-    margin: 0 auto;
-}
 h1 {
-    text-align: center;
+    text-align: center; 
+}
+a:visited {
+    color: blue;
 }
