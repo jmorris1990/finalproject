@@ -4,19 +4,19 @@ let ctx;
 //player position and size
 let playerX;
 let playerY;
-let playerWidth = 100;
-let playerHeight = 100;
+let playerWidth = 20;
+let playerHeight = 20;
 
 //fruit position, size, and velocity
 let fruitX;
 let fruitY;
 let fruitWidth = 10;
 let fruitHeight = 10;
-let fruitdX = (Math.round(Math.random()) * 2 - 1) * 2;
-let fruitdY = (Math.round(Math.random()) * 2 - 1) * 2;
+let fruitdX = (Math.round(Math.random()) * 2 - 1) * 3;
+let fruitdY = (Math.round(Math.random()) * 2 - 1) * 3;
 
 
-let fiveMinutes = 60 * 5;
+let countDown = 60 * 1;
 
 // character's movement
 let leftArrowPressed = false;
@@ -36,7 +36,7 @@ window.onload = function () {
     //60 frames per second refresh entire game loop
     setInterval(loop, 1000 / 60);
         display = document.querySelector('#time');
-    startTimer(fiveMinutes, display);
+    startTimer(countDown, display);
 
 };
 // score
