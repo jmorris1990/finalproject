@@ -41,15 +41,14 @@ window.onload = function () {
 
 };
 // score
-function drawScore() {
+const drawScore = () => {
     ctx.font = "16px Arial";
     ctx.fillStyle = 'blue';
     ctx.fillText("Score: "+score, 8, 20);
 }
 
 // timer
-
-function startTimer(duration, display) {
+const startTimer = (duration, display) => {
     let timer = duration, minutes, seconds;
     setInterval(function () {
         minutes = parseInt(timer / 60, 10);
@@ -68,12 +67,12 @@ function startTimer(duration, display) {
     }, 1000);
 }
 
-let startPlayer = () => {
+const startPlayer = () => {
     playerX = canvas.clientWidth / 2;
     playerY = canvas.height / 2;
 };
 
-let drawCanvas = () => {
+const drawCanvas = () => {
     ctx.fillStyle = 'grey';
     ctx.fillRect(0, 0, canvas.clientWidth, canvas.height);
 };
@@ -112,7 +111,7 @@ function control() {
 
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
-//takes keyboard input
+    //takes keyboard input
     function keyDownHandler(e) {
         if (e.keyCode == 39) {
             rightArrowPressed = true;
@@ -139,7 +138,7 @@ function control() {
 
 }
 //moves player square based on values from keyboard input
-function movePlayer() {
+const movePlayer = () => {
     if (rightArrowPressed === true) {
         playerX += 5;
         if (playerX >= canvas.width) {
@@ -167,19 +166,22 @@ function movePlayer() {
 }
 
 
-function collision() {
+const collision = () => {
     //detect location of player and fruit and if they intersect
     if (playerX < fruitX + fruitWidth &&
         playerX + playerWidth > fruitX &&
         playerY < fruitY + fruitHeight &&
         playerHeight + playerY > fruitY) {
-        //change position of fruit
+        //change position and velocity of fruit on collision
         startFruit();
+        fruitdX = (Math.round(Math.random()) * 2 - 1) * 3;
+        fruitdY = (Math.round(Math.random()) * 2 - 1) * 3;
+        //increase score by 1
         score ++;
-        //increment score
+        
     }
 }
-  
+
 //game loop
 const loop = () => {
     drawCanvas();
@@ -191,3 +193,5 @@ const loop = () => {
     drawScore();
     collision();
 };
+
+module.exports = {collision};
