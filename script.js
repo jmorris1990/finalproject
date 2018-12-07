@@ -61,8 +61,8 @@ const startTimer = (duration, display) => {
 
         if (--timer < 0) {
             timer = duration;
-            // alert(score); // display score
-            // location.reload(); // reload page
+            alert(score); // display score
+            location.reload(); // reload page
         }
     }, 1000);
 }
