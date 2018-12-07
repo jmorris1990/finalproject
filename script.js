@@ -40,14 +40,13 @@ window.onload = function () {
 
 };
 // score
-function drawScore() {
+const drawScore = () => {
     ctx.font = "16px Arial";
     ctx.fillStyle = 'blue';
     ctx.fillText("Score: "+score, 8, 20);
 }
 
 // timer
-
 const startTimer = (duration, display) => {
     let timer = duration, minutes, seconds;
     setInterval(function () {
@@ -66,12 +65,12 @@ const startTimer = (duration, display) => {
 }
 
 
-let startPlayer = () => {
+const startPlayer = () => {
     playerX = canvas.clientWidth / 2;
     playerY = canvas.height / 2;
 };
 
-let drawCanvas = () => {
+const drawCanvas = () => {
     ctx.fillStyle = 'grey';
     ctx.fillRect(0, 0, canvas.clientWidth, canvas.height);
 };
@@ -171,12 +170,13 @@ const collision = () => {
         playerX + playerWidth > fruitX &&
         playerY < fruitY + fruitHeight &&
         playerHeight + playerY > fruitY) {
-        //change position of fruit
+        //change position and velocity of fruit on collision
         startFruit();
-        score ++;
         fruitdX = (Math.round(Math.random()) * 2 - 1) * 2;
         ruitdY = (Math.round(Math.random()) * 2 - 1) * 2;
-        //increment score
+        //increase score by 1
+        score ++;
+        
     }
 }
   
