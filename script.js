@@ -67,12 +67,7 @@ const startTimer = (duration, display) => {
     }, 1000);
 }
 
-<<<<<<< HEAD
-
 const startPlayer = () => {
-=======
-let startPlayer = () => {
->>>>>>> 53386e1030c52b0f5f48e9e9243eabce0f0d6f11
     playerX = canvas.clientWidth / 2;
     playerY = canvas.height / 2;
 };
@@ -179,8 +174,8 @@ const collision = () => {
         playerHeight + playerY > fruitY) {
         //change position and velocity of fruit on collision
         startFruit();
-        fruitdX = (Math.round(Math.random()) * 2 - 1) * 2;
-        ruitdY = (Math.round(Math.random()) * 2 - 1) * 2;
+        fruitdX = (Math.round(Math.random()) * 2 - 1) * 3;
+        ruitdY = (Math.round(Math.random()) * 2 - 1) * 3;
         //increase score by 1
         score ++;
         
